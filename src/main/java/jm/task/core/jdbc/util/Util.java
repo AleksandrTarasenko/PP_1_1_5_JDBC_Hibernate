@@ -9,7 +9,8 @@ public class Util {
     public static final String DB_URL = "jdbc:mysql://localhost:3306/mydbkata";
     public static final String DB_USERNAME = "root";
     public static final String DB_PASSWORD = "root";
-    public static Connection getConnection(){
+
+    public static Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName(DB_DRIVER);
