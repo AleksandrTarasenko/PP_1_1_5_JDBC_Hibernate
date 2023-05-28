@@ -23,11 +23,11 @@ public class UserDaoHibernateImpl implements UserDao {
             Transaction transaction = session.beginTransaction();
             try {
                 String createTable = """
-                        create table if not exists users
+                        CREATE TABLE IF NOT EXISTS users
                         (
-                            id       BIGINT primary key auto_increment,
-                            name     varchar(40) ,
-                            lastName varchar(40) ,
+                            id       BIGINT PRIMARY KEY AUTO_INCREMENT,
+                            name     VARCHAR(40) ,
+                            lastName VARCHAR(40) ,
                             age      TINYINT     null
                         );""";
                 session.createSQLQuery(createTable).executeUpdate();
@@ -110,7 +110,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                session.createSQLQuery("truncate table users").executeUpdate();
+                session.createSQLQuery("TRUNCATE TABLE users").executeUpdate();
                 transaction.commit();
             } catch (Exception e) {
                 System.out.println("The table was not cleared" + e.getMessage());
