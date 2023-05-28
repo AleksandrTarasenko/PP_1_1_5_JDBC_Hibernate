@@ -87,7 +87,7 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             try {
                 String getAll = "SELECT user FROM User user";
@@ -102,7 +102,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void cleanUsersTable() {
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             try {
                 session.createSQLQuery("truncate table users").executeUpdate();
