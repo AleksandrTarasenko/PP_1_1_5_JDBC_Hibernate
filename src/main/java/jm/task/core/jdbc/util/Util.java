@@ -15,7 +15,7 @@ public class Util {
         return DriverManager.getConnection(BD_URL,BD_USERNAME,BD_PASSWORD);
     }
 
-    private static final String BD_URL = "jdbc:mysql://localhost:3306/users";
+    private static final String BD_URL = "jdbc:mysql://localhost:3306/mydbkata";
     private static final String BD_USERNAME = "root";
     private static final String BD_PASSWORD = "root";
     private static final String BD_DRIVER = "com.mysql.cj.jdbc.Driver";
