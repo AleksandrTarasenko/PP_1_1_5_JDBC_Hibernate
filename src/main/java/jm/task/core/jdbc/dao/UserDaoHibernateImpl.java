@@ -33,7 +33,8 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.createSQLQuery(createTable).executeUpdate();
                 transaction.commit();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("The table was not created" + e.getMessage());
+                transaction.rollback();
             }
         }
     }
@@ -47,7 +48,8 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.createSQLQuery(query).executeUpdate();
                 transaction.commit();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("The table was not deleted" + e.getMessage());
+                transaction.rollback();
             }
         }
     }
@@ -64,7 +66,8 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.save(user);
                 transaction.commit();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("The user was not added" + e.getMessage());
+                transaction.rollback();
             }
         }
     }
@@ -78,7 +81,8 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.delete(user);
                 transaction.commit();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("The user was not deleted" + e.getMessage());
+                transaction.rollback();
             }
         }
 
@@ -94,7 +98,8 @@ public class UserDaoHibernateImpl implements UserDao {
                 list = session.createQuery(getAll, User.class).getResultList();
                 transaction.commit();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("The users were not received" + e.getMessage());
+                transaction.rollback();
             }
         }
         return list;
@@ -108,7 +113,8 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.createSQLQuery("truncate table users").executeUpdate();
                 transaction.commit();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("The table was not cleared" + e.getMessage());
+                transaction.rollback();
             }
         }
     }
