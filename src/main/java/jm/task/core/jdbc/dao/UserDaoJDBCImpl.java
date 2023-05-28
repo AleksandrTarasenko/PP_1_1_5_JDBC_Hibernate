@@ -8,7 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private final Connection connection = Util.getConnection();
+    private final Connection connection;
+
+    {
+        try {
+            connection = Util.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public UserDaoJDBCImpl() {
 
@@ -19,7 +27,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         String creatTable = "CREATE TABLE IF NOT EXISTS users (id BIGINT NOT NULL AUTO_INCREMENT,name VARCHAR(45) NOT NULL, lastName VARCHAR(45) NOT NULL,age TINYINT NOT NULL, PRIMARY KEY (id))";
         try (PreparedStatement preparedStatement = connection.prepareStatement(creatTable)) {
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -66,7 +74,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
 
-        String query = "SELECT ID, NAME, LASTNAME, AGE FROM users";
+        String query = "SELECT * FROM users";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
